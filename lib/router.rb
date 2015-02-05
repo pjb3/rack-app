@@ -4,6 +4,9 @@ class Router
       if request.path == '/about'
         controller = AboutController.new(request)
         controller.show
+      elsif request.path == '/messages'
+        controller = MessagesController.new(request)
+        controller.show
       elsif request.path =~ /\/bios\/.+/
         controller = BiosController.new(request)
         controller.show
@@ -11,8 +14,11 @@ class Router
         controller = HomeController.new(request)
         controller.show
       end
+    elsif request.post?
+      controller = MessagesController.new(request)
+      controller.create
     else
-      "It was something else!"
+      "Invalid request method #{request.env['REQUEST_METHOD']}"
     end
   end
 end
