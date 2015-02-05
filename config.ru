@@ -8,4 +8,5 @@ require 'router'
 require 'application'
 require 'time'
 
+use Rack::Session::Cookie, secret: 'secret'
 run Application.new
