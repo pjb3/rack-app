@@ -7,6 +7,7 @@ class MessagesController < ApplicationController
   def create
     @messages = Array(session[:messages])
     @messages << params.merge("timestamp" => Time.now)
+    session[:messages] = @messages
     redirect_to "/messages"
   end
 end
